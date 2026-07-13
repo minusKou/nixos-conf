@@ -25,6 +25,7 @@
 
 	home-manager.useGlobalPkgs = true;
 	home-manager.useUserPackages = true;
+	home-manager.backupFileExtension = "backup";
 	home-manager.users.alhanz = { pkgs, ... }: {
 		home.username = "alhanz";
 		home.homeDirectory = "/home/alhanz";
@@ -36,5 +37,26 @@
 
 		programs.home-manager.enable = true;
 		home.stateVersion = "26.05";
+
+		programs.illogical-impulse = {
+			enable = true;
+			dotfiles = {
+				fish.enable = true;
+				kitty.enable = true;
+				starship.enable = true;
+			};
+		};
 	};
+
+	# Hyprdots Implementation
+	programs.hyprland.enable = true;
+	programs.dconf.enable = true;
+	services.geoclue2.enable = true;
+
+	fonts.packages = with pkgs; [
+		rubik
+		nerd-fonts.ubuntu
+		nerd-fonts.jetbrains-mono
+	];
 }
+
