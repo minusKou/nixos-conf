@@ -50,6 +50,7 @@ nixpkgs.overlays = [
 
   networking.hostName = "yae";
   networking.networkmanager.enable = true;
+  networking.firewall.checkReversePath = true;
 
   # GTA Online Hosts Patch
   networking.extraHosts = ''
@@ -76,7 +77,7 @@ nixpkgs.overlays = [
       filezilla
       vlc
       wpsoffice
-      caprine
+      caprine-bin
       linuxPackages.v4l2loopback
     ];
   };
@@ -129,11 +130,10 @@ nixpkgs.overlays = [
     home.packages = with pkgs; [
       fastfetch
       btop
-      foot
       kitty
       fish
-      steam
       vesktop
+      steam
       protonup-qt
       davinci-resolve-studio
     ];
@@ -251,7 +251,7 @@ nixpkgs.overlays = [
     alsa.support32Bit = true;
     pulse.enable = true;
 
-    # Configure the exact same low-latency settings natively!
+# 1. Configures core PipeWire for native Wayland apps (like Niri)
     extraConfig.pipewire."92-low-latency" = {
       "context.properties" = {
         "default.clock.rate" = 48000;
@@ -260,7 +260,16 @@ nixpkgs.overlays = [
         "default.clock.max-quantum" = 1024;
       };
     };
-  };
+
+    # 2. Configures the PulseAudio emulation layer for Wine/Proton games (like osu!)
+    extraConfig.pipewire-pulse."92-low-latency" = {
+      "pulse.properties" = {
+        "pulse.min.req" = "32/48000";
+        "pulse.min.frag" = "32/48000";
+        "pulse.min.quantum" = "32/48000";
+      };
+    };
+};
 
   # make pipewire realtime-capable
   security.rtkit.enable = true;
@@ -297,4 +306,7 @@ nixpkgs.overlays = [
       };
     };
   };
+
+  zramSwap.enable = true;
+  zramSwap.memoryPercent = 100;
 }
