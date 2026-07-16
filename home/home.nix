@@ -1,4 +1,10 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, ... }:
+
+let
+  # Dynamic Relative Path for dotfiles
+  dotfilesDir = "../nixos-conf/home/dotfiles";
+  link = folder: config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/${folder}";
+in
 
 {
   home.username = "alhanz";
@@ -38,5 +44,9 @@
     };
   };
 
-  xdg.configFile."niri".source = ./dotfiles/niri;
+  xdg.configFile = {
+    "niri".source = link "niri";
+    "kitty".source = link "kitty";
+    "fish".source = link "fish";
+  };
 }
