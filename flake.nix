@@ -30,26 +30,21 @@
 	};
 
 	outputs = { self, nixpkgs, home-manager, nix-cachyos-kernel, ... }@inputs: {
-		nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.yae = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 
 			specialArgs = { inherit inputs; };
 
 			modules = [
-        			(
-          				{ pkgs, ... }:
-          					{
-            						nixpkgs.overlays = [
-           							nix-cachyos-kernel.overlays.pinned
-            						];
-
-            					# ... your other configs
-          					}
-        			)
-
+   			({ pkgs, ... }:
+ 					{
+  					nixpkgs.overlays = [
+  						nix-cachyos-kernel.overlays.pinned
+  					];
+ 					}
+   			)
 				./hardware-configuration.nix
 				./configuration.nix
-
 
 				inputs.damx.nixosModules.default
 				home-manager.nixosModules.home-manager
