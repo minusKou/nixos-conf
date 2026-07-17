@@ -1,7 +1,6 @@
 { pkgs, inputs, config, ... }:
 
 let
-  # 100% dynamic, but uses absolute paths so the OS never gets confused!
   dotfilesDir = "${config.home.homeDirectory}/nixos-conf/home/dotfiles";
   link = subpath: config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/${subpath}";
 in

@@ -1,0 +1,4 @@
+spawn-at-startup "caprine" "--minimize"
+spawn-at-startup "protonvpn-app" "--start-minimized"
+spawn-at-startup "steam" "-silent"
+spawn-at-startup "vesktop" "-m"

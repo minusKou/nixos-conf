@@ -1,13 +1,13 @@
 // Niri Defaults
 include "niri/env.kdl"
-include "niri/execs.kdl"
+include "niri/startup.kdl"
 include "niri/general.kdl"
 include "niri/rules.kdl"
 include "niri/keybinds.kdl"
 
 // User custom
 include "custom/env.kdl"
-include "custom/execs.kdl"
+include "custom/startup.kdl"
 include "custom/general.kdl"
 include "custom/rules.kdl"
 include "custom/keybinds.kdl"

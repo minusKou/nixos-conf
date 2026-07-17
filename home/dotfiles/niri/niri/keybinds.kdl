@@ -6,6 +6,7 @@ binds {
     Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Period { spawn-sh "noctalia msg panel-toggle launcher \"/emo \""; }
+    Mod+C { spawn-sh "zed"; };
     Mod+E { spawn "kitty" "yazi"; }
     Mod+W { spawn-sh "zen"; }
 
@@ -132,7 +133,7 @@ binds {
     Mod+Shift+F { fullscreen-window; }
     Mod+M { maximize-window-to-edges; }
     Mod+Ctrl+F { expand-column-to-available-width; }
-    Mod+C { center-column; }
+    //Mod+C { center-column; } conflict
     Mod+Ctrl+C { center-visible-columns; }
 
     Mod+Minus { set-column-width "-10%"; }

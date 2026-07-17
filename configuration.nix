@@ -34,6 +34,7 @@
       libreoffice-qt
       linuxPackages.v4l2loopback
       neovim
+      nixd
       prismlauncher
       proton-pass
       proton-vpn
@@ -53,6 +54,24 @@
     ];
   };
 
+  # Enable the core Polkit framework
+  security.polkit.enable = true;
+  
+  # Create the systemd background user service
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "GNOME Polkit Authentication Agent";
+    wantedBy = [ "graphical-session.target" ];
+    wants = [ "graphical-session.target" ];
+    after = [ "graphical-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+  
   environment.systemPackages = [
     inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.osu-stable
     inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.wine-discord-ipc-bridge
@@ -67,7 +86,15 @@
     backupFileExtension = "backup";
 
     extraSpecialArgs = { inherit inputs; };
-
     users.alhanz = import ./home/home.nix;
   };
+
+  # zeditor related fixes
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc
+    zlib
+    glib
+    xorg.libX11
+  ];
 }

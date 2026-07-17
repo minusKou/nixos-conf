@@ -46,7 +46,6 @@
     gnome-themes-extra
     libsForQt5.qt5ct
     libsForQt5.qtstyleplugin-kvantum
-    lxqt.lxqt-policykit
     nwg-look
     orchis-theme
     papirus-icon-theme
@@ -89,7 +88,7 @@
     };
   };
 
-  xdg.mimeApps = {
+  xdg.mime = {
     enable = true;
     defaultApplications = {
       # Video Formats

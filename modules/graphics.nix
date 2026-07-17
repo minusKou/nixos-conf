@@ -11,12 +11,13 @@
       nvidia-vaapi-driver  # Allows VA-API backend on your NVIDIA card
     ];
   };
+  
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.bleeding_edge;
     modesetting.enable = true;
-    powerManagement.enable = false;
     open = true;
+    package = config.boot.kernelPackages.nvidiaPackages.bleeding_edge;
+    powerManagement.enable = false;
   };
 
   # Persistent DRM symlinks to prevent dynamic card-shuffling on boot
