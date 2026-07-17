@@ -3,10 +3,13 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
 
     // Desktop interface binds
-    Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+A { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+E { spawn-sh "thunar"; }
+    Mod+W { spawn-sh "zen"; }
+
     Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia msg session lock"; }
     Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
     // Media and System binds
@@ -29,10 +32,6 @@ binds {
     Mod+Down  { focus-window-down; }
     Mod+Up    { focus-window-up; }
     Mod+Right { focus-column-right; }
-    Mod+H     { focus-column-left; }
-    Mod+J     { focus-window-down; }
-    Mod+K     { focus-window-up; }
-    Mod+L     { focus-column-right; }
 
     Mod+Ctrl+Left  { move-column-left; }
     Mod+Ctrl+Down  { move-window-down; }
@@ -140,14 +139,14 @@ binds {
     Mod+Shift+Minus { set-window-height "-10%"; }
     Mod+Shift+Equal { set-window-height "+10%"; }
 
-    Mod+V       { toggle-window-floating; }
-    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-    Mod+W { toggle-column-tabbed-display; }
+    Mod+Alt+Space       { toggle-window-floating; }
+    //Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+    //Mod+W { toggle-column-tabbed-display; } conflict
 
     // Capture Ecosystem
-    Print { screenshot; }
-    Ctrl+Print { screenshot-screen; }
-    Alt+Print { screenshot-window; }
+    Mod+Shift+Alt+S { screenshot; }
+    Print { screenshot-screen; }
+    Mod+Shift+S { screenshot-window; }
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Shift+E { quit; }
