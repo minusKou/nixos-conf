@@ -5,6 +5,7 @@ binds {
     // Desktop interface binds
     Mod+A { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
+    Mod+Period { spawn-sh "noctalia msg panel-toggle launcher \"/emo \""; }
     Mod+E { spawn-sh "thunar"; }
     Mod+W { spawn-sh "zen"; }
 
@@ -120,7 +121,7 @@ binds {
     // Spatial Transformations
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
-    Mod+Period { expel-window-from-column; }
+    // Mod+Period { expel-window-from-column; } conflict
 
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-column-width-back; }

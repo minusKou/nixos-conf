@@ -48,10 +48,20 @@ in
   };
 
   xdg.configFile = {
-    "niri".source = link "niri";
-    "kitty".source = link "kitty";
-    "fish".source = link "fish";
-    "foot".source = link "foot";
-    "starship.toml".source = link "starship.toml";
-  };
+      # Niri
+      "niri".source = link "niri";
+  
+      # Kitty
+      "kitty/kitty.conf".source = link "kitty/kitty.conf";
+      "kitty/scroll_mark.py".source = link "kitty/scroll_mark.py";
+      "kitty/search.py".source = link "kitty/search.py";
+  
+      # Fish
+      "fish/config.fish".source = link "fish/config.fish";
+      "fish/fish_variables".source = link "fish/fish_variables";
+  
+      # Foot
+      "foot/foot.ini".source = link "foot/foot.ini";
+      "starship.toml".source = link "starship.toml";
+    };
 }
