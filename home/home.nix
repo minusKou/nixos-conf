@@ -1,9 +1,9 @@
 { pkgs, inputs, config, ... }:
 
 let
-  # Dynamic Relative Path for dotfiles
-  dotfilesDir = "../nixos-conf/home/dotfiles";
-  link = folder: config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/${folder}";
+  # 100% dynamic, but uses absolute paths so the OS never gets confused!
+  dotfilesDir = "${config.home.homeDirectory}/nixos-conf/home/dotfiles";
+  link = subpath: config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/${subpath}";
 in
 
 {
@@ -14,14 +14,17 @@ in
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    fastfetch
     btop
-    kitty
-    fish
-    vesktop
-    steam
-    protonup-qt
     davinci-resolve-studio
+    fastfetch
+    fish
+    foot
+    fzf
+    kitty
+    protonup-qt
+    starship
+    steam
+    vesktop
   ];
 
   imports = [
@@ -48,5 +51,7 @@ in
     "niri".source = link "niri";
     "kitty".source = link "kitty";
     "fish".source = link "fish";
+    "foot".source = link "foot";
+    "starship.toml".source = link "starship.toml";
   };
 }
