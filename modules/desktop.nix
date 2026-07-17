@@ -18,7 +18,7 @@
       # 1. Autologin: Boot straight into Niri without prompting for a password
       initial_session = {
         command = "niri-session";
-        user = "alhanz"; #
+        user = "alhanz";
       };
 
       # 2. Fallback / Lockscreen: If you log out, you get tuigreet
@@ -29,20 +29,29 @@
     };
   };
 
+  # Global Environment Variables
   environment.sessionVariables = {
     XCURSOR_THEME = "Bibata-Modern-Classic";
     XCURSOR_SIZE = "24";
+
+    # Force native Wayland rendering and let Kvantum handle window rules
+    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_USE_PORTAL = "1";
+    QT_STYLE_OVERRIDE = "kvantum";
   };
 
   # Theming and Desktop Packages
   environment.systemPackages = with pkgs; [
-    adwaita-icon-theme
     bibata-cursors
+    gnome-themes-extra
+    libsForQt5.qt5ct
+    libsForQt5.qtstyleplugin-kvantum
     lxqt.lxqt-policykit
     nwg-look
+    orchis-theme
     papirus-icon-theme
     qt6Packages.qt6ct
-    thunar
+    qt6Packages.qtstyleplugin-kvantum
     thunar-archive-plugin
     xwayland-satellite
   ];
@@ -74,12 +83,47 @@
     config = {
       common = {
         default = [ "gnome" ];
-          "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
-          "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+        "org.freedesktop.impl.portal.Screencast" = [ "gnome" ];
+        "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
       };
     };
   };
 
-  zramSwap.enable = true;
-  zramSwap.memoryPercent = 100;
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      # Video Formats
+      "video/mp4" = [ "vlc.desktop" ];
+      "video/x-matroska" = [ "vlc.desktop" ];
+      "video/webm" = [ "vlc.desktop" ];
+      "video/x-flv" = [ "vlc.desktop" ];
+      "video/quicktime" = [ "vlc.desktop" ];
+
+      # Audio Formats
+      "audio/mpeg" = [ "vlc.desktop" ];
+      "audio/x-wav" = [ "vlc.desktop" ];
+      "audio/ogg" = [ "vlc.desktop" ];
+      "audio/mp4" = [ "vlc.desktop" ];
+      "audio/flac" = [ "vlc.desktop" ];
+    };
+  };
+
+  qt = {
+    enable = true;
+    platformTheme = "qt5ct";
+  };
+
+  # Memory Optimization
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 100;
+    priority = 100;
+  };
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 180;
+    "vm.page-cluster" = 0;
+    "vm.watermark_boost_factor" = 0;
+  };
 }

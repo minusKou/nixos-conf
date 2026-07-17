@@ -1,12 +1,12 @@
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
+    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
 
     // Desktop interface binds
-    Mod+A { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Period { spawn-sh "noctalia msg panel-toggle launcher \"/emo \""; }
-    Mod+E { spawn-sh "thunar"; }
+    Mod+E { spawn "kitty" "yazi"; }
     Mod+W { spawn-sh "zen"; }
 
     Mod+Comma { spawn-sh "noctalia msg settings-toggle"; }

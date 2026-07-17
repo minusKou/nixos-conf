@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ...}: 
+{ config, pkgs, inputs, ...}:
 
 {
   imports = [
@@ -11,7 +11,7 @@
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
   system.stateVersion = "26.05";
-  
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = inputs.nix-cachyos-kernel.legacyPackages.${pkgs.system}.linuxPackages-cachyos-bore-lto-x86_64-v4;
@@ -25,20 +25,22 @@
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" ];
     packages = with pkgs; [
-      git
+      caprine-bin
       curl
-      wget
-      neovim
-      zed-editor
       feishin
+      filezilla
+      git
+      hunspell
+      libreoffice-qt
+      linuxPackages.v4l2loopback
+      neovim
+      prismlauncher
       proton-pass
       proton-vpn
-      prismlauncher
-      filezilla
       vlc
+      wget
       wpsoffice
-      caprine-bin
-      linuxPackages.v4l2loopback
+      zed-editor
     ];
   };
 
@@ -56,7 +58,6 @@
     inputs.nix-gaming.packages.${pkgs.stdenv.hostPlatform.system}.wine-discord-ipc-bridge
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
-    pkgs.davinci-resolve-studio
   ];
 
   # Home Manager
