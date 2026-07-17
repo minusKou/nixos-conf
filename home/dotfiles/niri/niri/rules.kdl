@@ -38,3 +38,24 @@ layer-rule {
         xray false
     }
 }
+
+// Steam Fixes
+window-rule {
+    match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
+    open-focused false
+    default-floating-position x=16 y=16 relative-to="bottom-right"
+}
+
+window-rule {
+    match app-id="steam" title="^Friends List$"
+    open-floating true
+    default-column-width { fixed 380; }
+    default-window-height { fixed 800; }
+}
+
+window-rule {
+    match app-id="steam" title="^Steam - News$"
+    match app-id="steam" title="^Steam Guard$"
+    open-floating true
+}
+
