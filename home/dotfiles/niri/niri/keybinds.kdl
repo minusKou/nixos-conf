@@ -6,7 +6,7 @@ binds {
     Mod+Space { spawn-sh "noctalia msg panel-toggle launcher"; }
     Mod+S { spawn-sh "noctalia msg panel-toggle control-center"; }
     Mod+Period { spawn-sh "noctalia msg panel-toggle launcher \"/emo \""; }
-    Mod+C { spawn-sh "zed"; };
+    Mod+C { spawn-sh "zeditor"; };
     Mod+E { spawn "kitty" "yazi"; }
     Mod+W { spawn-sh "zen"; }
 

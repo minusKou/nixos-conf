@@ -8,7 +8,7 @@
 
   # Noctalia Requirements
   hardware.bluetooth.enable = true;
-  services.tuned.enable = true;
+  #services.tuned.enable = true;
   services.upower.enable = true;
 
   # Display Manager
