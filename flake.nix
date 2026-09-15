@@ -23,6 +23,11 @@
       #home-manager.follows = "home-manager";
     };
 
+    xwayland-satellite = {
+      url = "github:Supreeeme/xwayland-satellite/v0.8.1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -34,6 +39,7 @@
     home-manager,
     lanzaboote,
     chaotic,
+    xwayland-satellite,
     ...
   }@inputs:
   let
@@ -44,7 +50,15 @@
       specialArgs = { inherit inputs username; };
 
       modules = [
-
+        # Need to downgrade temporarily to 0.8.1. See https://github.com/Supreeeme/xwayland-satellite/pull/494
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              xwayland-satellite = inputs.xwayland-satellite.packages.${final.system}.default;
+            })
+          ];
+        }
+        
        	./configuration.nix
 
        	# Read HW Configuration instead of Local
