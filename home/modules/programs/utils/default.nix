@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./proton-apps.nix
+  ];
+}
