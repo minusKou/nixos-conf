@@ -28,6 +28,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    damx = {
+      url = "github:minusKou/damx-flake/an515-57-hotfix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nix-gaming.url = "github:fufexan/nix-gaming";
@@ -40,6 +45,7 @@
     lanzaboote,
     chaotic,
     xwayland-satellite,
+    damx,
     ...
   }@inputs:
   let
@@ -58,7 +64,7 @@
             })
           ];
         }
-        
+
        	./configuration.nix
 
        	# Read HW Configuration instead of Local
@@ -72,6 +78,9 @@
 
 				# Lanzaboote
         lanzaboote.nixosModules.lanzaboote
+
+        # Div Acer Manager Max
+        damx.nixosModules.default
       ];
     };
   };

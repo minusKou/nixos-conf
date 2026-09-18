@@ -1,0 +1,3 @@
+{
+  programs.damx.enable = true;
+}
