@@ -1,5 +1,6 @@
 {
   imports = [
+    ./filezilla.nix
     ./warp-cli.nix
   ];
 
