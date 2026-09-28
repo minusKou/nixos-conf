@@ -3,6 +3,7 @@
     ./audio.nix
     ./bluetooth.nix
     ./graphics.nix
+    ./opentabletdriver.nix
     ./storage.nix
   ];
 
