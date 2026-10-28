@@ -27,17 +27,6 @@
     ];
   };
 
-  fileSystems."/mnt/Jin" = {
-    device = "/dev/disk/by-uuid/5102bdc9-8ae0-4f0b-b3de-d5d17fd06f87";
-    fsType = "btrfs";
-    options = [ 
-      "noatime"
-      "compress=zstd:3"
-      "ssd"
-      "discard=async"
-    ];
-  };
-  
   # System-wide Font Directory
   fonts.fontDir.enable = true;
 
@@ -51,6 +40,11 @@
 
     extraSpecialArgs = { inherit inputs username; };
     users.alhanz = import ./home/home.nix;
+  };
+
+  programs.gamescope = {
+    enable = true;
+    capSysNice = true; # May need adjustment depending on specific kernel/package versions
   };
 
   system.stateVersion = "26.11";
