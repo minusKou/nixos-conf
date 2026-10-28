@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    android-tools
+     android-tools
      btop
      curl
      eza
@@ -10,11 +10,13 @@
      fzf
      neovim
      pciutils
+     qbittorrent
      sbctl
      scrcpy
      starship
      tree
      unzip
      wget
+     zip
   ];
 }
