@@ -32,6 +32,7 @@
         "wireplumber.profiles" = {
           "main" = {
             "monitor.bluez-midi" = "disabled";
+            "monitor.alsa-seq" = "disabled";
           };
         };
       };

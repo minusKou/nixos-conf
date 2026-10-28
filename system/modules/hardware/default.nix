@@ -5,6 +5,7 @@
     ./graphics.nix
     ./opentabletdriver.nix
     ./storage.nix
+    ./virtual-audio.nix
   ];
 
   # ESP32 Rules
