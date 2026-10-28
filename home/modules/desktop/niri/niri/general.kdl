@@ -52,6 +52,12 @@ layout {
     }
 }
 
+gestures {
+    hot-corners {
+        off
+    }
+}
+
 blur {
     passes 2
     offset 3.0
