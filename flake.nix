@@ -27,7 +27,12 @@
       url = "github:minusKou/damx-flake/an515-57-hotfix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
+    nix-osu-stable = {
+      url = "github:gaavin/nix-osu-stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nix-gaming.url = "github:fufexan/nix-gaming";

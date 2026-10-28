@@ -1,4 +1,4 @@
-{ inputs, username, ... }:
+{ inputs, username, nix-osu-stable, ... }:
 {
   imports = [
     ./system/modules
