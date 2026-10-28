@@ -4,6 +4,7 @@
     ./core
     ./desktop
     ./hardware
+    ./programs/communication
     ./programs/development
     ./programs/gaming
     ./programs/network

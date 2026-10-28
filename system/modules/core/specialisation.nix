@@ -1,12 +1,11 @@
 { lib, ... }:
+
 {
   specialisation.battery.configuration = {
     system.nixos.tags = [ "battery" ];
 
-    # Force standard kernel modesetting on iGPU instead of nvidia driver
     services.xserver.videoDrivers = lib.mkForce [ "modesetting" ];
 
-    # Blacklist every Nvidia kernel module
     boot.extraModprobeConfig = ''
       blacklist nouveau
       options nouveau modeset=0
@@ -26,49 +25,39 @@
       "i2c_nvidia_gpu"
     ];
 
-    # Remove all NVIDIA PCIe endpoints so ACPI powers down the silicon completely
     services.udev.extraRules = ''
-      # Remove NVIDIA Audio Controller (HDMI/DisplayPort audio)
       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{remove}="1"
-
-      # Remove NVIDIA USB xHCI and Type-C controllers (if present)
       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{remove}="1"
       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{remove}="1"
-
-      # Remove NVIDIA VGA / 3D Display Controller (RTX 3050)
       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{remove}="1"
     '';
 
-    # Optional: Force CPU power savings on battery
     powerManagement.cpuFreqGovernor = lib.mkForce "powersave";
   };
 
   specialisation.vfio.configuration = {
-      system.nixos.tags = [ "vfio" ];
-  
-      # Host UI runs on Intel iGPU while 3050 is reserved for the VM
-      services.xserver.videoDrivers = lib.mkForce [ "modesetting" ];
-  
-      boot.kernelParams = [
-        "intel_iommu=on"
-        "iommu=pt"
-        "vfio-pci.ids=10de:25a2,10de:2291"
-      ];
-  
-      # Load VFIO shims in early boot before any graphics drivers
-      boot.initrd.kernelModules = [
-        "vfio_pci"
-        "vfio"
-        "vfio_iommu_type1"
-      ];
-  
-      # Prevent host from binding NVIDIA driver in this mode
-      boot.blacklistedKernelModules = [
-        "nouveau"
-        "nvidia"
-        "nvidia_drm"
-        "nvidia_modeset"
-        "nvidia_uvm"
-      ];
-    };
+    system.nixos.tags = [ "vfio" ];
+
+    services.xserver.videoDrivers = lib.mkForce [ "modesetting" ];
+
+    boot.kernelParams = [
+      "intel_iommu=on"
+      "iommu=pt"
+      "vfio-pci.ids=10de:25a2,10de:2291"
+    ];
+
+    boot.initrd.kernelModules = [
+      "vfio_pci"
+      "vfio"
+      "vfio_iommu_type1"
+    ];
+
+    boot.blacklistedKernelModules = [
+      "nouveau"
+      "nvidia"
+      "nvidia_drm"
+      "nvidia_modeset"
+      "nvidia_uvm"
+    ];
+  };
 }

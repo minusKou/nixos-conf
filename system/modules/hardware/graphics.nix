@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   # Intel tweaks
   boot.initrd.kernelModules = [ "i915" ];
