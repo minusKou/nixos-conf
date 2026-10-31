@@ -1,6 +1,7 @@
 {
   imports = [
     ./filezilla.nix
+    ./packet-tracer.nix
     ./warp-cli.nix
   ];
 
